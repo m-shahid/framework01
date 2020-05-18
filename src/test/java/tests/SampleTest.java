@@ -1,33 +1,27 @@
 package tests;
 
-import static org.testng.Assert.assertTrue;
+import static domain.pages.homepage.HomePage.getHomePage;
+import static domain.pages.searchpage.SearchPage.getSearchPage;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import core.Driver;
+import domain.pages.homepage.HomePage;
+import domain.pages.searchpage.SearchPage;;
 
-public class SampleTest extends Driver{
-  
-	
-  @Test
-  public void launchAndLoginTest() throws Exception {
-	  String url = "http://www.google.com";
-	  driver.get(url);
-	  driver.manage().window().maximize();
-	  Thread.sleep(3000);
-  }
-  
-  @Test(dependsOnMethods = { "launchAndLoginTest" })
-  public void searchTest() {
-	  String searchText = "Selenium";
-	  WebElement searchTextBox = driver.findElement(By.xpath("//*[@name='q']"));
-	  searchTextBox.sendKeys(searchText);
-	  
-	  WebElement searchButton = driver.findElement(By.xpath("(//*[@name='btnK'])[2]"));
-	  searchButton.click();
-	  
-	  assertTrue(driver.getTitle().contains(searchText));
-  }
+public class SampleTest extends BaseTest{
+
+	HomePage homePage = getHomePage();
+	SearchPage searchPage = getSearchPage();
+
+	@Test
+	public void searchTest() {
+
+		homePage.act()
+				.enterSearchText("selenium")
+				.clickOnSearchButton();
+		
+		searchPage.verify()
+					.pageTitleShouldContains("selenium");
+
+	}
 }
