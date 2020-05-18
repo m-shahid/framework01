@@ -1,27 +1,23 @@
 package tests;
 
-import static domain.pages.homepage.HomePage.getHomePage;
-import static domain.pages.searchpage.SearchPage.getSearchPage;
-
 import org.testng.annotations.Test;
 
-import domain.pages.homepage.HomePage;
-import domain.pages.searchpage.SearchPage;;
+import core.BaseTest;
+import domain.pages.BasePage;;
 
 public class SampleTest extends BaseTest{
-
-	HomePage homePage = getHomePage();
-	SearchPage searchPage = getSearchPage();
 
 	@Test
 	public void searchTest() {
 
-		homePage.act()
+		BasePage.getHomePage()
+				.act()
 				.enterSearchText("selenium")
 				.clickOnSearchButton();
 		
-		searchPage.verify()
-					.pageTitleShouldContains("selenium");
+		BasePage.getSearchPage()
+				.verify()
+				.pageTitleShouldContains("selenium");
 
 	}
 }

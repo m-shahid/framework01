@@ -16,7 +16,7 @@ public class DriverFactory {
 		if(driver == null) {
 			
 			String currentUserDirectory = System.getProperty("user.dir");
-			System.setProperty("webdriver.chrome.driver",currentUserDirectory + "\\src\\main\\resources\\drivers\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver",currentUserDirectory + "\\src\\test\\resources\\drivers\\chromedriver.exe");
 			driver = new ChromeDriver();
 			
 		}
